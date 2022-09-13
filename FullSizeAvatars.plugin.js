@@ -2,7 +2,7 @@
  * @name Full Res Avatars
  * @author Gentle Puppet
  * @authorId 199263542833053696
- * @version 1.0
+ * @version 1.0.1
  * @description Makes Discord Load The Full Res of Avatars in the Members/Friends List and Makes Avatars Bigger on Hover.
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -10,25 +10,32 @@
 module.exports = class GentlesPlugin {
 
     start() {
+		document.getElementById("HoverAvatar").remove();
 		//---- Hover Over Avatars to Make Them Bigger
 		function addStyle(styleString) {
-			const style = document.createElement('style');
+			const style = document.createElement('style', );
 			style.textContent = styleString;
 			document.head.append(style);
+			style.setAttribute("id", "HoverAvatar");
 		}
 		addStyle(`
-			div[role="img"],
-				avatar-6qzftW {
-				transition: height 0.5s, width 0.5s;
-			}
-			div[role="img"]:hover,avatar-6qzftW:hover {
-				transition: height 0.5s, width 0.5s;
-				height: 150px !important;
-				width: 150px !important
-				}
-			.layout-1qmrhw, .container-1oeRFJ, .avatar-6qzftW {
-				height:fit-content !important
-			}
+			/* Prevent User Account and Profile Avatar Growth */
+			.withTagAsButton-OsgQ9L .avatar-1EWyVD:hover, 
+			.withTagless-10ooWt .avatar-1EWyVD:hover 
+			{height: 32px !important; width: 32px !important;}
+			
+			/* Hover Size */
+			.avatar-1HDIsL:hover, .avatar-1HDIsL:hover > div,
+			.avatar-6qzftW:hover, .avatar-6qzftW:hover > div 
+			{height: 150px !important; width: 150px !important;}
+			
+			/* Ensure Enlarged Avatars Fit */
+			.container-32HW5s, .interactive-iyXY_x, .layout-1LjVue, .avatar-1HDIsL,
+			.container-1oeRFJ, .layout-1qmrhw, .avatar-6qzftW 
+			{height: fit-content !important;}
+			
+			/* Hover Size Animation */
+			div[role="img"],avatar-6qzftW,avatar-6qzftW:hover {transition: height 0.5s, width 0.5s;}
 		`);
 		
 		//---- jQuery v3.6.1
@@ -39,7 +46,7 @@ module.exports = class GentlesPlugin {
 		//------ Original Source: https://gist.githubusercontent.com/BrockA/2625891/raw/9c97aa67ff9c5d56be34a55ad6c18a314e5eb548/waitForKeyElements.js
         function waitForKeyElements(e,t,n,a){(o=void 0===a?$(e):$(a).contents().find(e))&&o.length>0?(l=!0,o.each(function(){var e=$(this);!e.data("alreadyFound")&&(t(e)?l=!1:e.data("alreadyFound",!0))})):l=!1;var o,l,r=waitForKeyElements.controlObj||{},i=e.replace(/[^\w]/g,"_"),d=r[i];l&&n&&d?(clearInterval(d),delete r[i]):d||(d=setInterval(function(){waitForKeyElements(e,t,n,a)},300),r[i]=d),waitForKeyElements.controlObj=r}
 		
-		//---- Modify Avatars
+		//---- Modify Avatars when they load
         waitForKeyElements('.avatarStack-3vfSFa > img', Upsize, 0);
         function Upsize(jNode) {
             var fixed = jNode.attr('src').replace('?size=32', '');
