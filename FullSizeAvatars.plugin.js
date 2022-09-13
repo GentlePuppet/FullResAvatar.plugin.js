@@ -1,9 +1,11 @@
 /**
- * @name Full Sized Avatars
+ * @name Full Res Avatars
  * @author Gentle Puppet
  * @authorId 199263542833053696
  * @version 1.0
- * @description Makes Discord Load The Full Res of Avatars in the Members/Friends List.
+ * @description Makes Discord Load The Full Res of Avatars in the Members/Friends List and Makes Avatars Bigger on Hover.
+ * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  */
 module.exports = class GentlesPlugin {
 
