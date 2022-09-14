@@ -4,7 +4,7 @@
  * @authorId 199263542833053696
  * @version 2.1
  * @description Makes Discord Load The Full Res of Avatars in the Members/Friends List and Makes Avatars Bigger on Hover.
- * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js/blob/main/FullSizeAvatars.plugin.js
+ * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  */
 module.exports = class FullResAvatars {
