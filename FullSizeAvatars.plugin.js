@@ -2,7 +2,7 @@
  * @name Full Res Avatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 2.0
+ * @version 2.1
  * @description Makes Discord Load The Full Res of Avatars in the Members/Friends List and Makes Avatars Bigger on Hover.
  * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js/blob/main/FullSizeAvatars.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -23,7 +23,7 @@ module.exports = class FullResAvatars {
 		//---- Create Avatar Hover Events
 		document.addEventListener("mouseover", hoverevent);
 		function hoverevent() {
-			document.querySelectorAll(".avatar-6qzftW").forEach(function(avatar) {
+			document.querySelectorAll(".avatar-6qzftW, .avatar-1HDIsL, .avatar-2MSPKk").forEach(function(avatar) {
 				avatar.onmouseover = ahoverover;
 				avatar.onmouseout = ahoverout;
 			})
@@ -32,14 +32,20 @@ module.exports = class FullResAvatars {
 		//---- Track Mouse Position
 		document.addEventListener("mousemove", funcmousemove) 
 		function funcmousemove(e){
-			document.querySelector("#ImagePanelHover").style.top = e.pageY - 10 + 'px';
-			document.querySelector("#ImagePanelHover").style.left = e.pageX - 220 + 'px';
+			if (document.querySelector(".avatar-6qzftW:hover")) {
+				document.querySelector("#ImagePanelHover").style.top = e.pageY - 10 + 'px';
+				document.querySelector("#ImagePanelHover").style.left = e.pageX - 220 + 'px';
+			}
+			else if (document.querySelector(".avatar-1HDIsL:hover") || document.querySelector(".avatar-2MSPKk:hover")) {
+				document.querySelector("#ImagePanelHover").style.top = e.pageY - 10 + 'px';
+				document.querySelector("#ImagePanelHover").style.left = e.pageX + 20 + 'px';
+			}
 		};
 		
 		//---- Start Hovering
 		function ahoverover(jnode){
-			var avatarsrc = document.querySelector(".avatar-6qzftW:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=256');
-			var status = document.querySelector(".avatar-6qzftW:hover > div > svg > rect").getAttribute('fill');
+			var avatarsrc = document.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=256');
+			var status = document.querySelector("div:hover > div > svg > rect").getAttribute('fill');
 			
 			document.querySelector("#ImagePanelHover").style.display = "block";
 			document.querySelector("#ImagePanelHover").src = avatarsrc;
