@@ -2,12 +2,31 @@
  * @name Full Res Avatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 2.1
- * @description Makes Discord Load The Full Res of Avatars in the Members/Friends List and Makes Avatars Bigger on Hover.
- * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js
+ * @version 2.2
+ * @description Hover over avatars to see a bigger version.
+ * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js/blob/main/FullSizeAvatars.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  */
+ 
+ const config = {
+	info: {
+		name: "Full Res Avatars",
+		id: "FullResAvatarHover",
+		description: "Hover over avatars to see a bigger version.",
+		version: "2.2",
+		author: "GentlePuppet",
+		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js"
+	}
+};
+ 
 module.exports = class FullResAvatars {
+	
+	getName() { return config.info.name; }
+	
+	load() {
+		try { global.ZeresPluginLibrary.PluginUpdater.checkForUpdate(config.info.name, config.info.version, config.info.updateUrl); }
+		catch (err) { console.error(this.getName(), "Failed to reach the ZeresPluginLibrary for Plugin Updater.", err); }
+	}
 
     start() {
 		//----Create Image Panel
