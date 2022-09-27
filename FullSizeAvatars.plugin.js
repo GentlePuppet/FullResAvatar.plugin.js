@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 3.1
+ * @version 3.2
  * @description Hover over avatars to see a bigger version. Click edit and change the numbers with the ← to customize the size of both the image and the panel containing the image.
  * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  */
@@ -12,7 +12,7 @@ const config = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "3.1",
+		version: "3.2",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
@@ -57,7 +57,6 @@ module.exports = class {
 		
 		if (mah == null || fah == null || fadmh == null ) {
 			ipm.style.display = "none";
-			ipm.src = "null";
 		}
 		if (mah) {
 			var ais = document.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=' + config.imagesize);
