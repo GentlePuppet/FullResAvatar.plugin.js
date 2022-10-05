@@ -3,5 +3,7 @@ A small plugin for betterdiscord allowing users to hover over avatars to make th
 
 ![image](https://user-images.githubusercontent.com/43224790/190882375-d12af1b8-637f-4d15-a2bd-79e7d2a63d53.png)
 
+[Here is a small clip to give a preview.](https://cdn.discordapp.com/attachments/386071888222486538/1027035038883258428/output.mp4)
+
 
 To install into betterdiscord download the js file above and then put it in the plugins folder.
