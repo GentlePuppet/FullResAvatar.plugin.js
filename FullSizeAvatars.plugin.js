@@ -60,7 +60,7 @@ module.exports = class {
 		if (mah == null || fah == null || fadmh == null ) {
 			ipm.style.display = "none";
 		}
-		if (mah || fah || fadmh || hah) {
+		if (mah || fah || fadmh) {
 			var ais = document.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=' + config.imagesize);
 			var status = document.querySelector("div:hover > div > svg > rect").getAttribute('fill');
 			ipm.src = ais;
