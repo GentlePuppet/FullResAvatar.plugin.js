@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 3.4
+ * @version 3.5
  * @description Hover over avatars to see a bigger version. Click edit and change the numbers with the ← to customize the size of both the image and the panel containing the image.
  * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -13,11 +13,17 @@ const config = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "3.4",
+		version: "3.5",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
-module.exports = class {
+module.exports = class {	
+	getName() { return config.info.name; }
+	//---- Try to load ZeresPluginLibrary to enable auto-updates
+	load() {
+		try { global.ZeresPluginLibrary.PluginUpdater.checkForUpdate(config.info.name, config.info.version, config.info.updateUrl); }
+		catch (err) { console.error(this.getName(), "Failed load the ZeresPluginLibrary for automatic updates.", err); }
+	}
 	//---- Start Plugin
     start() {
 		var pansize = (config.panelsize);
