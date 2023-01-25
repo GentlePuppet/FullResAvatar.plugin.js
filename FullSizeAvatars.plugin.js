@@ -2,9 +2,10 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 3.5
+ * @version 3.6
  * @description Hover over avatars to see a bigger version. Click edit and change the numbers with the ← to customize the size of both the image and the panel containing the image.
- * @source https://github.com/GentlePuppet/FullResAvatar.plugin.js/
+ * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
+ * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  */
 const config = {
@@ -13,7 +14,7 @@ const config = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "3.5",
+		version: "3.6",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
@@ -50,19 +51,19 @@ module.exports = class {
 	
 	//---- Track Mouse Event and Check If Hovering Over Avatars
 	fmm(e){
-		let mah = document.querySelector(".avatar-6qzftW:hover")
-		let fah = document.querySelector(".avatar-1HDIsL:hover")
-		let fadmh = document.querySelector(".avatar-2MSPKk:hover")
+		let container = document.querySelector("#app-mount")
+		let mah = container.querySelector(".avatar-6qzftW:hover")
+		let fah = container.querySelector(".avatar-1HDIsL:hover")
+		let fadmh = container.querySelector(".avatar-2MSPKk:hover")
 		let ipm = document.querySelector("#IPH")
-		let dih = (e.pageY / (document.querySelector("#app-mount").offsetHeight) * 100);
-		let diw = (e.pageX / (document.querySelector("#app-mount").offsetWidth) * 100);
+		let dih = (e.pageY / (container.offsetHeight) * 100);
+		let diw = (e.pageX / (container.offsetWidth) * 100);
 		
-		if (mah == null || fah == null || fadmh == null) {
+		if (!mah && !fah && !fadmh) {
 			ipm.style.display = "none";
-		}
-		if (mah || fah || fadmh) {
-			var ais = document.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=' + config.imagesize);
-			var status = document.querySelector("div:hover > div > svg > rect").getAttribute('fill');
+		} else {
+			var ais = container.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=' + config.imagesize);
+			var status = container.querySelector("div:hover > div > svg > rect").getAttribute('fill');
 			ipm.src = ais;
 			ipm.style.display = "block";
 			
@@ -74,10 +75,9 @@ module.exports = class {
 			else {ipm.style.left = e.pageX + 30 + 'px';}
 			
 			if (status == "transparent") {
-				var statusfix = document.querySelector("div:hover > div > svg > svg > rect").getAttribute('fill');
+				var statusfix = container.querySelector("div:hover > div > svg > svg > rect").getAttribute('fill');
 				ipm.style.background = statusfix;
 			} else {
-				var status = document.querySelector("div:hover > div > svg > rect").getAttribute('fill');
 				ipm.style.background = status;
 			}
 		}
