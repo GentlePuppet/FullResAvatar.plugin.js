@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 3.6
+ * @version 3.7
  * @description Hover over avatars to see a bigger version. Click edit and change the numbers with the ← to customize the size of both the image and the panel containing the image.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -55,15 +55,22 @@ module.exports = class {
 		let mah = container.querySelector(".avatar-6qzftW:hover")
 		let fah = container.querySelector(".avatar-1HDIsL:hover")
 		let fadmh = container.querySelector(".avatar-2MSPKk:hover")
+		let cmcah = container.querySelector(".compact-2Nkcau .avatar-2e8lTP:hover")
 		let ipm = document.querySelector("#IPH")
 		let dih = (e.pageY / (container.offsetHeight) * 100);
 		let diw = (e.pageX / (container.offsetWidth) * 100);
 		
-		if (!mah && !fah && !fadmh) {
+		if (!mah && !fah && !fadmh && !cmcah) {
 			ipm.style.display = "none";
 		} else {
-			var ais = container.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=' + config.imagesize);
-			var status = container.querySelector("div:hover > div > svg > rect").getAttribute('fill');
+			if (mah && fah && fadmh) { // Userlist avatars
+				var ais = container.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace('?size=32', '?size=' + config.imagesize);
+				var status = container.querySelector("div:hover > div > svg > rect").getAttribute('fill');
+			}
+			else if (cmcah) { // Compact chat avatars
+				var ais = container.querySelector("img:hover").src.replace('?size=32', '?size=' + config.imagesize);
+			}
+
 			ipm.src = ais;
 			ipm.style.display = "block";
 			
