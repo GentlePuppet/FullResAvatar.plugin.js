@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 3.8.2
+ * @version 3.8.3
  * @description Hover over avatars to see a bigger version. Click edit and change the numbers with the ← to customize the size of both the image and the panel containing the image.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -14,7 +14,7 @@ const config = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "3.8.2",
+		version: "3.8.3",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
@@ -52,7 +52,7 @@ module.exports = class {
 	//---- Track Mouse Event and Check If Hovering Over Avatars
 	fmm(e){
 		let container = document.querySelector("#app-mount")
-		let mah = container.querySelector('[class^="member-"] > [class^="layout-"] > [class^="avatar-"]:hover')
+		let mah = container.querySelector('[class^="member-"] > [class^="memberInner-"] > [class^="avatar-"]:hover')
 		let fah = container.querySelector('[class^="link-"] > [class^="layout-"] > [class^="avatar-"]:hover')
 		let fadmh = container.querySelector('[class^="listItemContents-"] > [class^="userInfo-"] > [class*="avatar-"]:hover')
 		let pah = container.querySelector('[class^="clickable-"] > [class^="avatarHoverTarget-"] > [class^="wrapper-"]:hover')
