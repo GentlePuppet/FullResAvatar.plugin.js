@@ -10,7 +10,6 @@
  */
 const fs = require("fs");
 const cpath = require("path");
-const crequest = require("request");
 
 const configFile = cpath.join(BdApi.Plugins.folder, "FullResAvatars.Config.json");
 
@@ -66,7 +65,7 @@ module.exports = class {
             console.log('Updates are disabled.');
             return;
         }
-        crequest.get(config.info.updateUrl, (error, response, body) => {
+        require("request").get(config.info.updateUrl, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 const updatedPluginContent = body;
                 
