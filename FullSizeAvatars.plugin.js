@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 4.0.1
+ * @version 4.0.2
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -20,7 +20,7 @@ const defaultConfig = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "4.0.1",
+		version: "4.0.2",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
@@ -209,60 +209,63 @@ module.exports = class {
     
     CheckifUpdate() {
         if (!config.EnableUpdates) {
-            console.log('Updates are disabled.');
+            console.log('FullSizeAvatars: Updates are disabled.');
             return;
         } 
-        if (config.EnableUpdates && !config.SilentUpdates) {
-            console.log('Silent Updates are disabled.');
-            if (document.getElementById("FSAUpdateNotif")) {document.getElementById("FSAUpdateNotif").remove();}
-            const UpdateNotif = document.createElement("div");
-            const UpdateText = document.createElement("a");
-            const CloseUpdate = document.createElement("a");
-            const title = document.querySelector("#app-mount")
-            title.before(UpdateNotif); UpdateNotif.append(UpdateText); UpdateNotif.append(CloseUpdate);
-            UpdateNotif.setAttribute("id", "FSAUpdateNotif");
-            UpdateNotif.setAttribute("style", "text-align: center; background: var(--brand-experiment); padding: 5px;");
-            UpdateText.setAttribute("style", "color: white; text-decoration: underline;");
-            CloseUpdate.setAttribute("style", "color: white; padding-left: 1%");
-            UpdateText.textContent = "Click to update - Full Res Avatars On Hover";
-            CloseUpdate.textContent = "X";
-            UpdateText.addEventListener("click", () => {
-                this.UpdatePlugin()
-                UpdateNotif.remove()
-            });
-            CloseUpdate.addEventListener("click", () => {
-                UpdateNotif.remove()
-            });
-            return;
-        } 
-        if (config.EnableUpdates && config.SilentUpdates) {
-            console.log('Silent Updates are enabled.');
-            this.UpdatePlugin()
+        if (config.EnableUpdates) {
+            console.log('FullSizeAvatars: Updates are Enabled')
+            require("request").get(defaultConfig.info.updateUrl, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    const updatedPluginContent = body;
+                    
+                    // Extract the version from the plugin content
+                    const match = updatedPluginContent.match(/version:\s*["'](\d+\.\d+\.\d+)["']/);
+                    const updatedVersion = match ? match[1] : null;
+        
+                    // Check if the versions match
+                    if (defaultConfig.info.version !== updatedVersion) {
+                        if (config.SilentUpdates) {
+                            console.log('FullSizeAvatars: Silent Updates are enabled.');
+                            fs.writeFile(require("path").join(BdApi.Plugins.folder, "FullSizeAvatars.plugin.js"), updatedPluginContent, (err) => {
+                                if (err) {
+                                    console.error('FullSizeAvatars: Error writing updated file:', err);
+                                } else {
+                                    console.log('FullSizeAvatars: Updated successfully.');
+                                }
+                            })
+                        } 
+                        else {
+                            console.log('FullSizeAvatars: Silent Updates are disabled.');
+                            if (document.getElementById("FSAUpdateNotif")) {document.getElementById("FSAUpdateNotif").remove();}
+                            const UpdateNotif = document.createElement("div");
+                            const UpdateText = document.createElement("a");
+                            const CloseUpdate = document.createElement("a");
+                            const title = document.querySelector("#app-mount")
+                            title.before(UpdateNotif); UpdateNotif.append(UpdateText); UpdateNotif.append(CloseUpdate);
+                            UpdateNotif.setAttribute("id", "FSAUpdateNotif");
+                            UpdateNotif.setAttribute("style", "text-align: center; background: var(--brand-experiment); padding: 5px;");
+                            UpdateText.setAttribute("style", "color: white; text-decoration: underline;");
+                            CloseUpdate.setAttribute("style", "color: white; padding-left: 1%");
+                            UpdateText.textContent = "Click to update - Full Res Avatars On Hover";
+                            CloseUpdate.textContent = "X";
+                            UpdateText.addEventListener("click", () => {
+                                fs.writeFile(require("path").join(BdApi.Plugins.folder, "FullSizeAvatars.plugin.js"), updatedPluginContent, (err) => {
+                                    if (err) {
+                                        console.error('FullSizeAvatars: Error writing updated file:', err);
+                                    } else {
+                                        console.log('FullSizeAvatars: Updated successfully.');
+                                    }
+                                })
+                                UpdateNotif.remove()
+                            });
+                            CloseUpdate.addEventListener("click", () => {
+                                UpdateNotif.remove()
+                            });
+                            return;
+                        } 
+                    } else {console.error('FullSizeAvatars: Error downloading update:', error);}
+                }
+            })
         }
     }
-
-    UpdatePlugin() {
-        require("request").get(defaultConfig.info.updateUrl, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-                const updatedPluginContent = body;
-                
-                // Extract the version from the plugin content
-                const match = updatedPluginContent.match(/version:\s*["'](\d+\.\d+\.\d+)["']/);
-                const updatedVersion = match ? match[1] : null;
-    
-                // Check if the versions match
-                if (defaultConfig.info.version !== updatedVersion) {
-                    fs.writeFile(require("path").join(BdApi.Plugins.folder, "FullSizeAvatars.plugin.js"), updatedPluginContent, (err) => {
-                        if (err) {
-                            console.error('Error writing updated FullSizeAvatars file:', err);
-                        } else {
-                            console.log('FullSizeAvatars updated successfully.');
-                        }
-                    });
-                }
-                } else {
-                    console.error('Error downloading FullSizeAvatars update:', error);
-                }
-            });
-    }
-};
+}
