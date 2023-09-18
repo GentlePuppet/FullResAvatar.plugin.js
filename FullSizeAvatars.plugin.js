@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 4.0.2
+ * @version 4.0.3
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -20,7 +20,7 @@ const defaultConfig = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "4.0.2",
+		version: "4.0.3",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
@@ -263,8 +263,8 @@ module.exports = class {
                             });
                             return;
                         } 
-                    } else {console.error('FullSizeAvatars: Error downloading update:', error);}
-                }
+                    } else { console.log("FullSizeAvatars: Plugin is Up-to-date") }
+                } else {console.error('FullSizeAvatars: Error downloading update:', error)}
             })
         }
     }
