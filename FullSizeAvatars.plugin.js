@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 4.0.0
+ * @version 4.0.1
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -20,7 +20,7 @@ const defaultConfig = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "4.0.0",
+		version: "4.0.1",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
@@ -227,7 +227,7 @@ module.exports = class {
             UpdateText.textContent = "Click to update - Full Res Avatars On Hover";
             CloseUpdate.textContent = "X";
             UpdateText.addEventListener("click", () => {
-                UpdatePlugin()
+                this.UpdatePlugin()
                 UpdateNotif.remove()
             });
             CloseUpdate.addEventListener("click", () => {
@@ -237,7 +237,7 @@ module.exports = class {
         } 
         if (config.EnableUpdates && config.SilentUpdates) {
             console.log('Silent Updates are enabled.');
-            UpdatePlugin()
+            this.UpdatePlugin()
         }
     }
 
