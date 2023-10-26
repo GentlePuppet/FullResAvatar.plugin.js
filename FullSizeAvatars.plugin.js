@@ -20,7 +20,7 @@ const defaultConfig = {
 	info: {
 		name: "Full Res Avatars On Hover",
 		id: "FullSizeAvatars",
-		version: "4.0.3",
+		version: "4.0.4",
 		updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
 	}
 };
