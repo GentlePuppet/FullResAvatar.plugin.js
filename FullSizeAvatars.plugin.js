@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 4.0.3
+ * @version 4.0.4
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -174,10 +174,10 @@ module.exports = class {
 	//---- Track Mouse Event and Check If Hovering Over Avatars
 	fmm(e){
 		let container = document.querySelector("#app-mount")
-		let mah = container.querySelector('[class^="member-"] > [class^="memberInner-"] > [class^="avatar-"]:hover')
-		let fah = container.querySelector('[class^="link-"] > [class^="layout-"] > [class^="avatar-"]:hover')
-		let fadmh = container.querySelector('[class^="listItemContents-"] > [class^="userInfo-"] > [class*="avatar-"]:hover')
-		let pah = container.querySelector('[class^="clickable-"] > [class^="avatarHoverTarget-"] > [class^="wrapper-"]:hover')
+		let mah = container.querySelector('[class^="member"] > [class^="memberInner-"] > [class^="avatar"]:hover')
+		let fah = container.querySelector('[class^="link"] > [class^="layout"] > [class^="avatar"]:hover')
+		let fadmh = container.querySelector('[class^="listItemContents"] > [class^="userInfo"] > [class*="avatar"]:hover')
+		let pah = container.querySelector('[class^="clickable"] > [class^="avatarHoverTarget"] > [class^="wrapper"]:hover')
 		let ipm = document.querySelector("#IPH")
 		let dih = (e.pageY / (container.offsetHeight) * 100);
 		let diw = (e.pageX / (container.offsetWidth) * 100);
