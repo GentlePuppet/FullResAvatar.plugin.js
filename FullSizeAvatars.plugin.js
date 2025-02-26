@@ -5,8 +5,8 @@
  * @version 5.0.0
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
- * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
- * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
+ * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/refs/heads/main/FullSizeAvatars.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/refs/heads/main/FullSizeAvatars.plugin.js
  */
 const fs = require("fs");
 
@@ -21,7 +21,7 @@ const defaultConfig = {
         name: "Full Res Avatars On Hover",
         id: "FullSizeAvatars",
         version: "5.0.0",
-        updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
+        updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/refs/heads/main/FullSizeAvatars.plugin.js",
     }
 };
 
