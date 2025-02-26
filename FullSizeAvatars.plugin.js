@@ -60,7 +60,7 @@ module.exports = class {
         const ip = document.createElement("img");
         document.body.after(ip);
         ip.setAttribute("id", "IPH");
-        ip.setAttribute("style", "height:" + Number(config.panelsize + 5) + "px;width:" + Number(config.panelsize + 5) + "px;padding:5px;display:none;z-index:999999;position:absolute;");
+        ip.setAttribute("style", "height:" + Number(config.panelsize + 5) + "px;width:" + Number(config.panelsize + 5) + "px;padding:5px;display:none;z-index:999999;position:absolute;transition: top 0.1s ease;");
 
         //---- Create Track Mouse Event
         document.addEventListener("mousemove", this.mmhfunc)
@@ -147,7 +147,7 @@ module.exports = class {
                             config.SilentUpdates = silentUpdatesInput.checked ? 1 : 0;
                             config.imagesize = parseInt(imageSizeInput.value);
                             config.panelsize = parseInt(panelSizeInput.value);
-                            document.getElementById("IPH").setAttribute("style", `height:${config.panelsize + 5}px;width:${config.panelsize + 5}px;padding:5px;display:none;z-index:999999;position:absolute;`);
+                            document.getElementById("IPH").setAttribute("style", `height:${config.panelsize + 5}px;width:${config.panelsize + 5}px;padding:5px;display:none;z-index:999999;position:absolute;transition: top 0.1s ease;`);
 
                             // Save the updated config to the JSON file
                             this.saveConfigToFile();
