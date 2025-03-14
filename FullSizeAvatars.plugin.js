@@ -2,12 +2,36 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 5.0.0
+ * @version 5.0.1
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  * @updateUrl https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
  */
+
+/*@cc_on
+@if (@_jscript)
+    
+    // Offer to help install for users who open the file directly.
+    var shell = WScript.CreateObject("WScript.Shell");
+    var AXO = new ActiveXObject("Scripting.FileSystemObject");
+    var PluginPath = shell.ExpandEnvironmentStrings("%APPDATA%\\BetterDiscord\\plugins");
+    
+    // Inform the user that they need to manually install the plugin.
+    shell.Popup("It looks like you've tried to run the plugin directly. \nPlease never do that! \nPlease place this plugin file into the BetterDiscord plugins folder.", 0, "This is a BetterDiscord Plugin", 0x30);
+    
+    // Open the BetterDiscord plugins folder in File Explorer.
+    if (AXO.FolderExists(PluginPath)) {
+        shell.Exec("explorer " + PluginPath);
+        shell.Popup("The BetterDiscord plugins folder has been opened. Please place the plugin file there.", 0, "Manual Install Instructions", 0x40);
+    } else {
+        shell.Popup("The BetterDiscord plugins folder couldn't be found. \nAre you sure BetterDiscord is installed?", 0, "Plugin Folder Missing", 0x10);
+    }
+    WScript.Quit();
+
+@else@*/
+
+
 const fs = require("fs");
 
 const configFile = require("path").join(BdApi.Plugins.folder, "FullResAvatars.Config.json");
@@ -20,7 +44,7 @@ const defaultConfig = {
     info: {
         name: "Full Res Avatars On Hover",
         id: "FullSizeAvatars",
-        version: "5.0.0",
+        version: "5.0.1",
         updateUrl: "https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js",
     }
 };
@@ -225,15 +249,18 @@ module.exports = class {
     //---- Track Mouse Event and Check If Hovering Over Avatars
     fmm(e) {
         let container = document.querySelector("#app-mount")
-        let mah = container.querySelector('[class^="member"] > [class^="memberInner"] > [class^="avatar"]:hover')
+        // Server User List
+        let mah = container.querySelector('[class^="memberInner"] > [class^="avatar"]:hover')
+        // Friends List
         let fah = container.querySelector('[class^="link"] > [class^="layout"] > [class^="avatar"]:hover')
+        // Friends DM List
         let fadmh = container.querySelector('[class^="listItemContents"] > [class^="userInfo"] > [class*="avatar"]:hover')
-        let pah = container.querySelector('[class^="clickable"] > [class^="avatarHoverTarget"] > [class^="wrapper"]:hover')
+        // Larger Avatar Popup
         let ipm = document.querySelector("#IPH")
         let dih = (e.pageY / (container.offsetHeight) * 100);
         let diw = (e.pageX / (container.offsetWidth) * 100);
 
-        if (!mah && !fah && !fadmh && !pah) {
+        if (!mah && !fah && !fadmh) {
             ipm.style.display = "none";
         } else {
             var ais = container.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace(/\?size=\d+/g, '?size=' + config.imagesize);
