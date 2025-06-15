@@ -2,7 +2,7 @@
  * @name FullResAvatars
  * @author GentlePuppet
  * @authorId 199263542833053696
- * @version 5.0.1
+ * @version 5.0.2
  * @description Hover over avatars to see a bigger version.
  * @website https://github.com/GentlePuppet/FullResAvatar.plugin.js/
  * @source https://raw.githubusercontent.com/GentlePuppet/FullResAvatar.plugin.js/main/FullSizeAvatars.plugin.js
@@ -259,13 +259,34 @@ module.exports = class {
         let ipm = document.querySelector("#IPH")
         let dih = (e.pageY / (container.offsetHeight) * 100);
         let diw = (e.pageX / (container.offsetWidth) * 100);
+        
+        // Try all selectors in priority order and pick the first match
+        const selectors = [
+            "div:hover > div > svg > rect",
+            "div:hover > div > svg > svg > rect",
+            "div:hover > div > svg > g > svg > rect"
+        ];
+
+        let statusElm = null;
+
+        for (const selector of selectors) {
+            const element = container.querySelector(selector);
+            if (element) {
+                statusElm = element;
+                break;
+            }
+        }
+        if (statusElm) {
+            var status = statusElm.getAttribute('fill');
+        } else {
+            statusElm = null
+        }
 
         if (!mah && !fah && !fadmh) {
             ipm.style.display = "none";
         } else {
             var ais = container.querySelector("div:hover > div > svg > foreignObject > div > img").src.replace(/\?size=\d+/g, '?size=' + config.imagesize);
-            var status = container.querySelector("div:hover > div > svg > rect").getAttribute('fill');
-
+            
             ipm.src = ais;
             ipm.style.display = "block";
 
@@ -276,11 +297,16 @@ module.exports = class {
             if (diw >= 50) { ipm.style.left = e.pageX - config.panelsize - 30 + 'px' }
             else { ipm.style.left = e.pageX + 30 + 'px'; }
 
-            if (status == "transparent") {
+            if (!statusElm) {
+                ipm.style.background = "transparent";
+                ipm.style.filter = "opacity(0.4)";
+            } else if (status == "transparent") {
                 var statusfix = container.querySelector("div:hover > div > svg > svg > rect").getAttribute('fill');
                 ipm.style.background = statusfix;
+                ipm.style.filter = "opacity(1)";
             } else {
                 ipm.style.background = status;
+                ipm.style.filter = "opacity(1)";
             }
         }
     }
