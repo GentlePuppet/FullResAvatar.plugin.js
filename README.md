@@ -1,3 +1,6 @@
+# Moved to: https://github.com/GentlePuppet/BetterDiscordPlugins/tree/main/FullResAvatarHover
+
+
 # Full Res Hover Avatars
 A small plugin for betterdiscord allowing users to hover over avatars to make them bigger.
 
